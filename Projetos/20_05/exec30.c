@@ -10,7 +10,7 @@ int main()
   scanf("%d", &b);
   printf("Digite um numero: \n");
   scanf("%d", &c);
-  if (a < b && a < c && b < c)
+  if (a < b && a < c && b < c) //verificar qual numero é menor e qual é maior
   {
     printf("Ordem crescente: %d, %d, %d.", a, b, c);
   }

@@ -3,7 +3,7 @@
 
 int main()
 {
-  int idade;
+  int idade; //declaração de variáveis
   printf("Qual a idade do nadador?\n");
   scanf("%d", &idade);
   if (idade >= 5 && idade <= 7) //se a idade for maior que 5 e menor que 7

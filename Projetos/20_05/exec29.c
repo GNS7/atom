@@ -3,10 +3,10 @@
 
 int main()
 {
-  int a = 5;
-  int b = 2;
-  int soma;
-  int num_acerto = 0;
+  int a = 5; //declaração de variáveis
+  int b = 2; //declaração de variáveis
+  int soma; //soma dos dois numeros
+  int num_acerto = 0; //Quantidade de questoes acertadas
   printf("Qual e a soma de %d e %d? \n", a, b);
   scanf("%d", &soma);
   if (soma == 7)
