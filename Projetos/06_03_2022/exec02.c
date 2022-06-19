@@ -7,7 +7,7 @@ int main()
   for (int i = 0; i < 100; i++) //for loop, num + 1, <100
   {
     ++num1;
-    printf("%d, ", num1);
+    printf("%d, ", i);
   }
   printf("\n----------------------------------------\n");
   while (a < 100) //while...do loop, num + 1, <100
@@ -15,6 +15,7 @@ int main()
     ++a;
     ++num2;
     printf("%d, ", num2);
+
   }
   printf("\n----------------------------------------\n");
   do //do...while loop, num + 1, <100

@@ -8,7 +8,7 @@ int main()
   {
     printf("Digite um valor: ");
     scanf("%d", &input);
-    num += input;
+    num += input; // soma de todos inputs
   }
   printf("soma: %d", num);
   return 0;

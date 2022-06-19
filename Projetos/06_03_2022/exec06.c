@@ -8,8 +8,8 @@ int main()
   {
     printf("Digite um valor: ");
     scanf("%d", &input);
-    num += input;
-    ++quant;
+    num += input; //soma de inputs
+    ++quant; // quantidade de inputs
   }
   //printf("i = %d", quant);
   media = num / quant;

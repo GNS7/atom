@@ -10,7 +10,7 @@ int main()
     for (int i = 0; i < quant; i++)
     {
       printf("%d ", num);
-      num += 2;
+      num += 2; //incremento de 2
     }
     return 0;
 }
