@@ -10,6 +10,7 @@ int main() {
   struct Bandas B1;
   printf("O nome da banda: ");
   gets (B1.nome);
+  //fflush (stdin);
   printf("O estilo musical: ");
   gets (B1.tipo_musica);
   printf("Numero de integrantes: ");
@@ -17,6 +18,7 @@ int main() {
   printf("Posicao no seu top 5: ");
   scanf ("%d", &B1.posicao_ranking);
 
+  printf("\n");
   printf("O nome da banda: %s\n" , B1.nome);
   printf("O estilo musical: %s\n" , B1.tipo_musica);
   printf("Numero de integrantes: %d\n", B1.num_integrantes);
