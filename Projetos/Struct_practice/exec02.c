@@ -11,6 +11,7 @@ int main() {
 	struct Bandas B[5];
 	for (int i = 0; i < 5; i++)
 	{
+		fflush (stdin);
 		printf("O nome da banda: ");
 		fgets (B[i].nome, 100, stdin);
 	  fflush (stdin);
@@ -21,6 +22,7 @@ int main() {
 		scanf ("%d", &B[i].num_integrantes);
 		printf("Posicao no seu top 5: ");
 		scanf ("%d", &B[i].posicao_ranking);
+		fflush (stdin);
 	}
 	for (int i = 0; i < 5; i++)
 	{
