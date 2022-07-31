@@ -50,59 +50,64 @@ int main()
 	read_file (&fp, cadastro, count);
 	media (cadastro, count);
 
-	printf
-	(
-		"1.  Imprimir todos os elementos do arranjo; \n"
-		"2.  Imprimir apenas os nomes dos alunos; \n"
-		"3.  Imprimir o nome dos alunos e sua respectiva nota final; \n"
-		"4.  Buscar os dados de um aluno usando a busca sequencial; \n"
-		"5.  Imprimir os alunos ordenados de acordo com sua matricula; \n"
-		"6.  Editar as notas de um aluno, para isso e necessario que se busque os dados do aluno. \n"
-		"7.  Imprimir a matricula, nome e nota final do aluno que obteve a maior nota de todas; \n"
-		"8.  Imprimir  a  matricula,  nome  e  nota  final  do  aluno  que  obteve  a menor nota de todas; \n"
-		"9.  Imprimir quantos alunos foram aprovados e quantos alunos foram reprovados,  imprima  ainda  a  media  geral.  Os  alunos  aprovados serao aqueles que obtiverem media maior ou igual a 6.0; \n"
-		"0.  Sair do programa; \n"
-	);
-	scanf("%d", &opcao);
-
-	switch (opcao)
+	while (1)
 	{
-	case 0:
-		return 0;
-		break;
-	case 1:
-		print_arr (cadastro, count);
-		break;
-	case 2:
-		print_names (cadastro, count);
-		break;
-	case 3:
-		print_nome_media (cadastro, count);
-		break;
-	case 4:
-		search (cadastro, count, &num_busca);
-		break;
-	case 5:
-		order (cadastro, count);
-		print_arr (cadastro, count);
-		break;
-	case 6:
-		search (cadastro, count, &num_busca);
-		//printf("\n Numero de busca: %d\n", num_busca);
-		change_notes (cadastro, count, num_busca); //muda as notas
-		media (cadastro, count); //refaz a media
-		print_struct (cadastro, count, num_busca);
-		break;
-	case 7:
-		print_struct (cadastro, count, search_maior_nota (cadastro, count));  //a funcao search maior nota retorna um valor de matricula e a print struct recebe esse valor de matricula e usa ele pra imprimir as informacoes
-		break;
-	case 8:
-		print_struct (cadastro, count, search_menor_nota (cadastro, count)); //a funcao search menor nota retorna um valor de matricula e a print struct recebe esse valor de matricula e usa ele pra imprimir as informacoes
-		break;
-	case 9:
-		aprovados (cadastro, count, &alunos_aprovados, &alunos_reprovados);
-		printf("\n %d alunos aprovados e %d alunos reprovados", alunos_aprovados, alunos_reprovados);
-		printf("\nMedia geral: %f\n", media_geral(cadastro, count));
+		printf
+		(
+			"1.  Imprimir todos os elementos do arranjo; \n"
+			"2.  Imprimir apenas os nomes dos alunos; \n"
+			"3.  Imprimir o nome dos alunos e sua respectiva nota final; \n"
+			"4.  Buscar os dados de um aluno usando a busca sequencial; \n"
+			"5.  Imprimir os alunos ordenados de acordo com sua matricula; \n"
+			"6.  Editar as notas de um aluno, para isso e necessario que se busque os dados do aluno. \n"
+			"7.  Imprimir a matricula, nome e nota final do aluno que obteve a maior nota de todas; \n"
+			"8.  Imprimir  a  matricula,  nome  e  nota  final  do  aluno  que  obteve  a menor nota de todas; \n"
+			"9.  Imprimir quantos alunos foram aprovados e quantos alunos foram reprovados,  imprima  ainda  a  media  geral.  Os  alunos  aprovados serao aqueles que obtiverem media maior ou igual a 6.0; \n"
+			"0.  Sair do programa; \n"
+		);
+		scanf("%d", &opcao);
+
+
+		switch (opcao)
+		{
+		case 0:
+			return 0;
+			break;
+		case 1:
+			print_arr (cadastro, count);
+			break;
+		case 2:
+			print_names (cadastro, count);
+			break;
+		case 3:
+			print_nome_media (cadastro, count);
+			break;
+		case 4:
+			search (cadastro, count, &num_busca);
+			break;
+		case 5:
+			order (cadastro, count);
+			print_arr (cadastro, count);
+			break;
+		case 6:
+			search (cadastro, count, &num_busca);
+			//printf("\n Numero de busca: %d\n", num_busca);
+			change_notes (cadastro, count, num_busca); //muda as notas
+			media (cadastro, count); //refaz a media
+			print_struct (cadastro, count, num_busca);
+			break;
+		case 7:
+			print_struct (cadastro, count, search_maior_nota (cadastro, count)); //a funcao search maior nota retorna um valor de matricula e a print struct recebe esse valor de matricula e usa ele pra imprimir as informacoes
+			break;
+		case 8:
+			print_struct (cadastro, count, search_menor_nota (cadastro, count)); //a funcao search menor nota retorna um valor de matricula e a print struct recebe esse valor de matricula e usa ele pra imprimir as informacoes
+			break;
+		case 9:
+			aprovados (cadastro, count, &alunos_aprovados, &alunos_reprovados);
+			printf("\n %d alunos aprovados e %d alunos reprovados", alunos_aprovados, alunos_reprovados);
+			printf("\nMedia geral: %f\n", media_geral(cadastro, count));
+		}
+		printf("\n");
 	}
 	order (cadastro, count); //ordena o vetor
 	new_file (cadastro, count); //cria um novo arquivo baseado vetor modificado e ordenado
