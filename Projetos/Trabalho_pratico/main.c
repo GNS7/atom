@@ -8,10 +8,8 @@ typedef struct alunos
 	char nome_aluno[100];
 	float notas[3];
 	float media;
-	//int aprovado; //0 reprovado e 1 aprovado
 } alunos;
 
-//void fill_arr (alunos *arr);
 void print_arr (alunos *arr, int size); //imprime o vetor
 void open_file (FILE **f); //abre o arquivo e conta quantas linhas ele tem
 void read_file (FILE **f, alunos *cadastro, int size); //le o arquivo
@@ -26,11 +24,12 @@ void change_notes (alunos *arr, int size, int num_busca); //muda a valor das not
 int search_maior_nota (alunos *arr, int size); //acha a maior nota e retorna o numero do aluno
 int search_menor_nota (alunos *arr, int size); //acha a maior nota e retorna o numero do aluno
 void aprovados (alunos *arr, int size, int *aprovados, int *reprovados); //Compara a media dos alunos com 6 para determinar se o aluno foi aprovado ou reprovado
+float media_geral (alunos *arr, int size); // Faz a media de todas as medias
+void new_file (alunos *arr, int size); //cria um novo arquivo dps do switch
 
 int main()
 {
 	int opcao, num_matricula, soma_medias, alunos_aprovados, alunos_reprovados, count = 0, num_busca;
-	//fill_arr(cadastro);
 
 	FILE *fp;
 	open_file (&fp);
@@ -50,8 +49,6 @@ int main()
 	alunos *cadastro = (alunos*) malloc (count * sizeof(alunos)); //alocacao dinamica de memoria para 116 structs
 	read_file (&fp, cadastro, count);
 	media (cadastro, count);
-
-	//printf("contador: %i\n", count);
 
 	printf
 	(
@@ -105,12 +102,15 @@ int main()
 	case 9:
 		aprovados (cadastro, count, &alunos_aprovados, &alunos_reprovados);
 		printf("\n %d alunos aprovados e %d alunos reprovados", alunos_aprovados, alunos_reprovados);
+		printf("\nMedia geral: %f\n", media_geral(cadastro, count));
 	}
+	order (cadastro, count); //ordena o vetor
+	new_file (cadastro, count); //cria um novo arquivo baseado vetor modificado e ordenado
 
 	return 0;
 }
 
-void open_file (FILE **f) //abre o arquivo e conta quantas linhas ele tem
+void open_file (FILE **f) //abre o arquivo
 {
 	*f = fopen ("alunos.txt", "r+");
 	if (*f == NULL)
@@ -135,7 +135,6 @@ void count_lines (FILE **f, int *count) //Contar o numero de linhas no arquivo
 
 void read_file (FILE **f, alunos *cadastro, int size) //le o arquivo
 {
-	//fopen ("alunos.txt", "r+");
 	for (int i = 0; i < size; i++)
 	{
 		fscanf (*f, "%i", &cadastro[i].num_aluno);
@@ -144,7 +143,21 @@ void read_file (FILE **f, alunos *cadastro, int size) //le o arquivo
 		fscanf (*f, "%f", &cadastro[i].notas[1]);
 		fscanf (*f, "%f", &cadastro[i].notas[2]);
 	}
-	//fclose (*f);
+}
+
+void new_file (alunos *arr, int size) //cria um novo arquivo dps do switch
+{
+	FILE *fw = fopen ("new_alunos.txt", "w");
+	for (int i = 0; i < size; i++)
+	{
+		fprintf (fw, "%i ", arr[i].num_aluno);
+		fprintf (fw, "%s ", arr[i].nome_aluno);
+		fprintf (fw, "%.1f ", arr[i].notas[0]);
+		fprintf (fw, "%.1f ", arr[i].notas[1]);
+		fprintf (fw, "%.1f ", arr[i].notas[2]);
+		fprintf (fw, "%.1f ", arr[i].media);
+		fprintf (fw, "\n");
+	}
 }
 
 void media (alunos *arr, int size)
@@ -162,6 +175,15 @@ void media (alunos *arr, int size)
 	}
 }
 
+float media_geral (alunos *arr, int size) // Faz a media de todas as medias
+{
+	float media = 0;
+	for (int i; i < size; i++)
+	{
+		media += arr[i].media;
+	}
+	return media / 116.0;
+}
 void print_arr (alunos *arr, int size) //imprime o vetor
 {
 	for (int i = 0; i < size; i++)
@@ -172,7 +194,6 @@ void print_arr (alunos *arr, int size) //imprime o vetor
 		printf("%.2f ", arr[i].notas[1]);
 		printf("%.2f ", arr[i].notas[2]);
 		printf("media: %.2f \n", arr[i].media);
-		//printf("%i\n", arr[i].aprovado);
 	}
 }
 
@@ -228,12 +249,12 @@ void order (alunos *arr, int size) //Ordena o vetor com base no numero da matric
 
 void search (alunos *arr, int size, int *num_busca) //Funcao para busca usando o numero de matricula
 {
+	int status = 0;
 	printf("Digite a matricula do aluno: ");
 	scanf("%d", &*num_busca);
 	for (int i = 0; i < size; i++)
 	{
 		if (arr[i].num_aluno == *num_busca)
-
 		{
 			printf("%d ", arr[i].num_aluno);
 			printf("%s ", arr[i].nome_aluno);
@@ -241,7 +262,13 @@ void search (alunos *arr, int size, int *num_busca) //Funcao para busca usando o
 			printf("%.2f ", arr[i].notas[1]);
 			printf("%.2f ", arr[i].notas[2]);
 			printf("media: %.2f \n", arr[i].media);
+			status = 1;
 		}
+	}
+	if (status == 0) //se nao encontrar alunos, imprime mensagem de erro
+	{
+		printf("Aluno nao encontrado \n");
+		exit(1);
 	}
 }
 
@@ -368,7 +395,6 @@ void aprovados (alunos *arr, int size, int *aprovados, int *reprovados) //Compar
 		{
 			++*reprovados;
 		}
-		//printf ("%d e %d     ", *aprovados, *reprovados);
 	}
 }
 
