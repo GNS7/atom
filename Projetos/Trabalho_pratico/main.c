@@ -111,7 +111,7 @@ int main()
 	}
 	order (cadastro, count); //ordena o vetor
 	new_file (cadastro, count); //cria um novo arquivo baseado vetor modificado e ordenado
-
+	free(cadastro);
 	return 0;
 }
 
@@ -187,7 +187,7 @@ float media_geral (alunos *arr, int size) // Faz a media de todas as medias
 	{
 		media += arr[i].media;
 	}
-	return media / 116.0;
+	return media / size;
 }
 void print_arr (alunos *arr, int size) //imprime o vetor
 {
